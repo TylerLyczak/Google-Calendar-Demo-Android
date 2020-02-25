@@ -46,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Convert the dates given to the correct format
         try {
+            // Convert date to the first format
             Date date = originalFormat.parse(startDate);
             Date eDate = originalFormat.parse(endDate);
 
+            // Convert it into the second format
             startDateFormatted = targetFormat.format(date);
             endDateFormatted = targetFormat.format(eDate);
 
@@ -145,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
             // Ask the user for permission and then re-run
             Log.i("No Permission", "No Permission");
             int requestCode = 1;
+            // Re-request to ask for permission
             requestPermissions(new String[]{"android.permission.WRITE_CALENDAR", "android.permission.READ_CALENDAR"}, requestCode);
-            return;
         }
     }
 }
