@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
             long eventId = Long.parseLong(uri.getLastPathSegment());
             Log.i("Event_Id", String.valueOf(eventId));
+            Toast.makeText(this, "Now check Google Calendar, you may need to refresh it, it takes time", Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
             e.printStackTrace();
