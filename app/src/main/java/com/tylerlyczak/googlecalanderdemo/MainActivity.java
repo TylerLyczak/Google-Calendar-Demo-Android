@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 getContentResolver().insert(CalendarContract.Reminders.CONTENT_URI, values);
             } catch (Exception e) {
                 e.printStackTrace();
+                //
             }
 
             Toast.makeText(this, "Now check Google Calendar, you may need to refresh it, it takes time", Toast.LENGTH_LONG).show();
