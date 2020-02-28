@@ -146,7 +146,8 @@ public class MainActivity extends AppCompatActivity {
         String titleString = titleText.getText().toString();
         String descString = descText.getText().toString();
         String locString = locText.getText().toString();
-        int reminderInt = Integer.parseInt(reminderText.toString());
+        String reminderString = reminderText.getText().toString();
+        int reminderInt = Integer.parseInt(reminderString);
 
         // Calls the function to add the event to the calender
         addToDeviceCalendar(startDate, endDate, titleString, descString, locString, reminderInt);
