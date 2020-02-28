@@ -31,7 +31,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private void addToDeviceCalendar(String startDate,String endDate, String title,String description, String location) {
+    private void addToDeviceCalendar(String startDate,String endDate, String title,String description, String location, int reminder) {
 
         // Make the strings for the formatted times
         String startDateFormatted = "";
@@ -112,6 +112,18 @@ public class MainActivity extends AppCompatActivity {
 
             long eventId = Long.parseLong(uri.getLastPathSegment());
             Log.i("Event_Id", String.valueOf(eventId));
+
+            // We add the reminder time to the new event
+            try {
+                values.clear();
+                values.put(CalendarContract.Reminders.EVENT_ID, eventId);
+                values.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+                values.put(CalendarContract.Reminders.MINUTES, reminder);
+                getContentResolver().insert(CalendarContract.Reminders.CONTENT_URI, values);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             Toast.makeText(this, "Now check Google Calendar, you may need to refresh it, it takes time", Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
@@ -126,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         EditText titleText = (EditText) findViewById(R.id.titleText);
         EditText descText = (EditText) findViewById(R.id.descText);
         EditText locText = (EditText) findViewById(R.id.locText);
+        EditText reminderText = (EditText) findViewById(R.id.reminderText);
 
         // Converts the EditTexts to Strings
         String startDate = startText.getText().toString();
@@ -133,9 +146,11 @@ public class MainActivity extends AppCompatActivity {
         String titleString = titleText.getText().toString();
         String descString = descText.getText().toString();
         String locString = locText.getText().toString();
+        String reminderString = reminderText.getText().toString();
+        int reminderInt = Integer.parseInt(reminderString);
 
         // Calls the function to add the event to the calender
-        addToDeviceCalendar(startDate, endDate, titleString, descString, locString);
+        addToDeviceCalendar(startDate, endDate, titleString, descString, locString, reminderInt);
     }
 
     @Override
