@@ -112,6 +112,17 @@ public class MainActivity extends AppCompatActivity {
 
             long eventId = Long.parseLong(uri.getLastPathSegment());
             Log.i("Event_Id", String.valueOf(eventId));
+
+            try {
+                values.clear();
+                values.put(CalendarContract.Reminders.EVENT_ID, eventId);
+                values.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+                values.put(CalendarContract.Reminders.MINUTES, 5);
+                getContentResolver().insert(CalendarContract.Reminders.CONTENT_URI, values);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             Toast.makeText(this, "Now check Google Calendar, you may need to refresh it, it takes time", Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
